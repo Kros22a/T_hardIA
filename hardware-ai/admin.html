@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador | Hardware-AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container navbar">
+            <a href="dashboard.html" class="logo">Hardware<span>-AI</span></a>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Inicio</a></li>
+                <li><a href="compare.html">Comparar</a></li>
+                <li><a href="survey.html">Encuesta</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="admin.html" class="active">Admin</a></li>
+            </ul>
+            <div class="nav-actions">
+                <span class="user-info" id="user-name">Administrador</span>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="logout-btn" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Salir
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Panel de Administrador</h1>
+            <p>Gestiona usuarios, encuestas y contenido del sistema</p>
+        </div>
+    </section>
+
+    <!-- Admin Panel -->
+    <section class="section">
+        <div class="container admin-panel">
+            <div class="admin-header">
+                <h2 class="section-title">Panel de Control</h2>
+                <div class="admin-stats">
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-number" id="total-users">0</div>
+                        <div class="admin-stat-label">Usuarios</div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-number" id="total-surveys">0</div>
+                        <div class="admin-stat-label">Encuestas</div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-number" id="total-comparisons">0</div>
+                        <div class="admin-stat-label">Comparaciones</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-tabs">
+                <div class="admin-tab active" data-tab="users">Usuarios</div>
+                <div class="admin-tab" data-tab="surveys">Encuestas</div>
+                <div class="admin-tab" data-tab="comparisons">Comparaciones</div>
+                <div class="admin-tab" data-tab="settings">Configuración</div>
+            </div>
+
+            <div class="admin-content">
+                <!-- Usuarios Tab -->
+                <div class="admin-tab-content active" id="users-tab">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3><i class="fas fa-users"></i> Gestión de Usuarios</h3>
+                        <div>
+                            <input type="text" id="search-users" placeholder="Buscar usuarios..." style="padding: 0.5rem; border-radius: 4px; border: 1px solid #ddd;">
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Fecha Registro</th>
+                                    <th>Último Acceso</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <tr><td colspan="6" class="text-center">Cargando usuarios...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Encuestas Tab -->
+                <div class="admin-tab-content" id="surveys-tab" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3><i class="fas fa-poll"></i> Respuestas de Encuestas</h3>
+                        <div>
+                            <select id="filter-surveys" style="padding: 0.5rem; border-radius: 4px; border: 1px solid #ddd;">
+                                <option value="">Todas las encuestas</option>
+                                <option value="last-week">Última semana</option>
+                                <option value="last-month">Último mes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Usuario</th>
+                                    <th>Fecha</th>
+                                    <th>Preguntas Respondidas</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="surveys-table-body">
+                                <tr><td colspan="5" class="text-center">Cargando encuestas...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Comparaciones Tab -->
+                <div class="admin-tab-content" id="comparisons-tab" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3><i class="fas fa-balance-scale"></i> Historial de Comparaciones</h3>
+                        <div>
+                            <select id="filter-comparisons" style="padding: 0.5rem; border-radius: 4px; border: 1px solid #ddd;">
+                                <option value="">Todas las categorías</option>
+                                <option value="cpu">CPU</option>
+                                <option value="gpu">GPU</option>
+                                <option value="ram">RAM</option>
+                                <option value="ssd">SSD</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Usuario</th>
+                                    <th>Componentes</th>
+                                    <th>Fecha</th>
+                                    <th>Categoría</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="comparisons-table-body">
+                                <tr><td colspan="6" class="text-center">Cargando comparaciones...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Configuración Tab -->
+                <div class="admin-tab-content" id="settings-tab" style="display: none;">
+                    <h3><i class="fas fa-cog"></i> Configuración del Sistema</h3>
+                    <div class="form-group">
+                        <label for="system-name">Nombre del Sistema</label>
+                        <input type="text" id="system-name" value="Hardware-AI" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-email">Email de Administrador</label>
+                        <input type="email" id="admin-email" value="admin@hardware-ai.com" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="maintenance-mode">Modo Mantenimiento</label>
+                        <select id="maintenance-mode" class="form-control">
+                            <option value="off">Desactivado</option>
+                            <option value="on">Activado</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="max-comparisons">Máx. Comparaciones por Usuario</label>
+                        <input type="number" id="max-comparisons" value="100" min="1" max="1000" class="form-control">
+                    </div>
+                    <button class="btn btn-primary" id="save-settings">Guardar Configuración</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para detalles -->
+    <div id="detail-modal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center;">
+        <div class="modal-content" style="background: white; border-radius: 8px; padding: 2rem; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3 id="modal-title">Detalles</h3>
+                <button id="close-modal" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            </div>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Hardware-AI</h3>
+                    <p>Tu asistente inteligente para tomar decisiones informadas sobre hardware.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="dashboard.html">Inicio</a></li>
+                        <li><a href="compare.html">Comparar</a></li>
+                        <li><a href="survey.html">Encuesta</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="admin.html">Admin</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> contacto@hardware-ai.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Ciudad, País</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Hardware-AI. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <script>
+        // Inicializar Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyClzzRrxUOTwd_dfOBE6dVv3V1G6xrTXuE",
+            authDomain: "t-hardia.firebaseapp.com",
+            projectId: "t-hardia",
+            storageBucket: "t-hardia.firebasestorage.app",
+            messagingSenderId: "462770565143",
+            appId: "1:462770565143:web:d6de124051899b9c742c52",
+            measurementId: "G-YQ9D6T371T"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Verificar autenticación y permisos de administrador
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                document.getElementById('user-name').textContent = user.displayName || user.email.split('@')[0];
+                
+                // Verificar si es administrador
+                if (user.email === 'admin@hardware-ai.com' || user.email === 'carlos19190115@gmail.com') {
+                    loadAdminData();
+                    setupEventListeners();
+                } else {
+                    // No es administrador, redirigir
+                    alert('Acceso denegado. Solo administradores pueden acceder a esta sección.');
+                    window.location.href = 'dashboard.html';
+                }
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Cerrar sesión
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            firebase.auth().signOut().then(function() {
+                window.location.href = 'index.html';
+            }).catch(function(error) {
+                console.error('Error al cerrar sesión:', error);
+                alert('Error al cerrar sesión: ' + error.message);
+            });
+        });
+
+        // Toggle tema
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            const icon = this.querySelector('i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Cargar tema guardado
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                const icon = document.getElementById('theme-toggle').querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+            }
+        });
+
+        // Cambiar entre pestañas
+        document.querySelectorAll('.admin-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remover clase activa de todas las pestañas
+                document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+                // Agregar clase activa a la pestaña clickeada
+                this.classList.add('active');
+                
+                // Ocultar todos los contenidos
+                document.querySelectorAll('.admin-tab-content').forEach(content => {
+                    content.style.display = 'none';
+                });
+                
+                // Mostrar el contenido correspondiente
+                const tabName = this.getAttribute('data-tab');
+                document.getElementById(`${tabName}-tab`).style.display = 'block';
+            });
+        });
+
+        // Configurar event listeners
+        function setupEventListeners() {
+            // Búsqueda de usuarios
+            document.getElementById('search-users').addEventListener('input', function() {
+                loadUsers(this.value);
+            });
+            
+            // Filtros
+            document.getElementById('filter-surveys').addEventListener('change', function() {
+                loadSurveys(this.value);
+            });
+            
+            document.getElementById('filter-comparisons').addEventListener('change', function() {
+                loadComparisons(this.value);
+            });
+            
+            // Guardar configuración
+            document.getElementById('save-settings').addEventListener('click', saveSettings);
+            
+            // Modal
+            document.getElementById('close-modal').addEventListener('click', function() {
+                document.getElementById('detail-modal').style.display = 'none';
+            });
+        }
+
+        // Cargar datos de administrador
+        function loadAdminData() {
+            loadUsers();
+            loadSurveys();
+            loadComparisons();
+            loadSettings();
+        }
+
+        // Cargar usuarios
+        function loadUsers(search = '') {
+            const usersBody = document.getElementById('users-table-body');
+            usersBody.innerHTML = '<tr><td colspan="6" class="text-center">Cargando usuarios...</td></tr>';
+            
+            let query = db.collection('usuarios');
+            
+            if (search) {
+                query = query.where('email', '>=', search.toLowerCase())
+                             .where('email', '<=', search.toLowerCase() + '\uf8ff');
+            }
+            
+            query.orderBy('fechaRegistro', 'desc')
+                 .limit(50)
+                 .get()
+                 .then((querySnapshot) => {
+                     usersBody.innerHTML = '';
+                     if (querySnapshot.empty) {
+                         usersBody.innerHTML = '<tr><td colspan="6" class="text-center">No se encontraron usuarios</td></tr>';
+                         return;
+                     }
+                     
+                     querySnapshot.forEach((doc) => {
+                         const user = doc.data();
+                         const row = document.createElement('tr');
+                         row.innerHTML = `
+                             <td>${doc.id.substring(0, 8)}...</td>
+                             <td>${user.nombre || user.displayName || 'N/A'}</td>
+                             <td>${user.email}</td>
+                             <td>${user.fechaRegistro ? user.fechaRegistro.toDate().toLocaleDateString() : 'N/A'}</td>
+                             <td>${user.ultimoAcceso ? user.ultimoAcceso.toDate().toLocaleDateString() : 'N/A'}</td>
+                             <td class="admin-table-actions">
+                                 <button class="btn btn-outline btn-sm" title="Ver detalles" onclick="viewUser('${doc.id}')">
+                                     <i class="fas fa-eye"></i>
+                                 </button>
+                                 <button class="btn btn-danger btn-sm" title="Eliminar" onclick="deleteUser('${doc.id}')">
+                                     <i class="fas fa-trash"></i>
+                                 </button>
+                             </td>
+                         `;
+                         usersBody.appendChild(row);
+                     });
+                     
+                     // Actualizar estadística
+                     document.getElementById('total-users').textContent = querySnapshot.size;
+                 })
+                 .catch((error) => {
+                     console.error('Error cargando usuarios:', error);
+                     usersBody.innerHTML = '<tr><td colspan="6" class="text-center text-danger">Error al cargar usuarios: ' + error.message + '</td></tr>';
+                 });
+        }
+
+        // Cargar encuestas
+        function loadSurveys(filter = '') {
+            const surveysBody = document.getElementById('surveys-table-body');
+            surveysBody.innerHTML = '<tr><td colspan="5" class="text-center">Cargando encuestas...</td></tr>';
+            
+            let query = db.collection('encuestas').orderBy('fecha', 'desc').limit(50);
+            
+            if (filter === 'last-week') {
+                const weekAgo = new Date();
+                weekAgo.setDate(weekAgo.getDate() - 7);
+                query = query.where('fecha', '>=', weekAgo);
+            } else if (filter === 'last-month') {
+                const monthAgo = new Date();
+                monthAgo.setMonth(monthAgo.getMonth() - 1);
+                query = query.where('fecha', '>=', monthAgo);
+            }
+            
+            query.get()
+                 .then((querySnapshot) => {
+                     surveysBody.innerHTML = '';
+                     if (querySnapshot.empty) {
+                         surveysBody.innerHTML = '<tr><td colspan="5" class="text-center">No se encontraron encuestas</td></tr>';
+                         return;
+                     }
+                     
+                     querySnapshot.forEach((doc) => {
+                         const survey = doc.data();
+                         const respuestasCount = survey.respuestas ? Object.keys(survey.respuestas).length : 0;
+                         const row = document.createElement('tr');
+                         row.innerHTML = `
+                             <td>${doc.id.substring(0, 8)}...</td>
+                             <td>${survey.usuarioNombre || 'Anónimo'}</td>
+                             <td>${survey.fecha ? survey.fecha.toDate().toLocaleDateString() : 'N/A'}</td>
+                             <td>${respuestasCount} preguntas</td>
+                             <td class="admin-table-actions">
+                                 <button class="btn btn-outline btn-sm" title="Ver respuestas" onclick="viewSurvey('${doc.id}')">
+                                     <i class="fas fa-file-alt"></i>
+                                 </button>
+                                 <button class="btn btn-danger btn-sm" title="Eliminar" onclick="deleteSurvey('${doc.id}')">
+                                     <i class="fas fa-trash"></i>
+                                 </button>
+                             </td>
+                         `;
+                         surveysBody.appendChild(row);
+                     });
+                     
+                     document.getElementById('total-surveys').textContent = querySnapshot.size;
+                 })
+                 .catch((error) => {
+                     console.error('Error cargando encuestas:', error);
+                     surveysBody.innerHTML = '<tr><td colspan="5" class="text-center text-danger">Error al cargar encuestas: ' + error.message + '</td></tr>';
+                 });
+        }
+
+        // Cargar comparaciones
+        function loadComparisons(filter = '') {
+            const comparisonsBody = document.getElementById('comparisons-table-body');
+            comparisonsBody.innerHTML = '<tr><td colspan="6" class="text-center">Cargando comparaciones...</td></tr>';
+            
+            let query = db.collection('comparaciones').orderBy('fecha', 'desc').limit(50);
+            
+            if (filter) {
+                query = query.where('categoria', '==', filter);
+            }
+            
+            query.get()
+                 .then((querySnapshot) => {
+                     comparisonsBody.innerHTML = '';
+                     if (querySnapshot.empty) {
+                         comparisonsBody.innerHTML = '<tr><td colspan="6" class="text-center">No se encontraron comparaciones</td></tr>';
+                         return;
+                     }
+                     
+                     querySnapshot.forEach((doc) => {
+                         const comp = doc.data();
+                         const row = document.createElement('tr');
+                         row.innerHTML = `
+                             <td>${doc.id.substring(0, 8)}...</td>
+                             <td>${comp.usuarioNombre || 'Anónimo'}</td>
+                             <td>${comp.nombres ? `${comp.nombres.componenteA} vs ${comp.nombres.componenteB}` : 'N/A'}</td>
+                             <td>${comp.fecha ? comp.fecha.toDate().toLocaleDateString() : 'N/A'}</td>
+                             <td>${comp.categoria ? comp.categoria.toUpperCase() : 'N/A'}</td>
+                             <td class="admin-table-actions">
+                                 <button class="btn btn-outline btn-sm" title="Ver detalles" onclick="viewComparison('${doc.id}')">
+                                     <i class="fas fa-search"></i>
+                                 </button>
+                                 <button class="btn btn-danger btn-sm" title="Eliminar" onclick="deleteComparison('${doc.id}')">
+                                     <i class="fas fa-trash"></i>
+                                 </button>
+                             </td>
+                         `;
+                         comparisonsBody.appendChild(row);
+                     });
+                     
+                     document.getElementById('total-comparisons').textContent = querySnapshot.size;
+                 })
+                 .catch((error) => {
+                     console.error('Error cargando comparaciones:', error);
+                     comparisonsBody.innerHTML = '<tr><td colspan="6" class="text-center text-danger">Error al cargar comparaciones: ' + error.message + '</td></tr>';
+                 });
+        }
+
+        // Cargar configuración
+        function loadSettings() {
+            // Por ahora valores por defecto
+            document.getElementById('system-name').value = 'Hardware-AI';
+            document.getElementById('admin-email').value = 'admin@hardware-ai.com';
+            document.getElementById('maintenance-mode').value = 'off';
+            document.getElementById('max-comparisons').value = '100';
+        }
+
+        // Guardar configuración
+        function saveSettings() {
+            alert('Configuración guardada correctamente');
+        }
+
+        // Funciones de acción
+        function viewUser(userId) {
+            db.collection('usuarios').doc(userId).get()
+                .then((doc) => {
+                    if (doc.exists) {
+                        const user = doc.data();
+                        const modalBody = document.getElementById('modal-body');
+                        modalBody.innerHTML = `
+                            <h4>Detalles del Usuario</h4>
+                            <table class="admin-table">
+                                <tr><td><strong>ID:</strong></td><td>${userId}</td></tr>
+                                <tr><td><strong>Nombre:</strong></td><td>${user.nombre || user.displayName || 'N/A'}</td></tr>
+                                <tr><td><strong>Email:</strong></td><td>${user.email}</td></tr>
+                                <tr><td><strong>Fecha de Registro:</strong></td><td>${user.fechaRegistro ? user.fechaRegistro.toDate().toLocaleString() : 'N/A'}</td></tr>
+                                <tr><td><strong>Último Acceso:</strong></td><td>${user.ultimoAcceso ? user.ultimoAcceso.toDate().toLocaleString() : 'N/A'}</td></tr>
+                            </table>
+                        `;
+                        document.getElementById('modal-title').textContent = 'Detalles del Usuario';
+                        document.getElementById('detail-modal').style.display = 'flex';
+                    }
+                })
+                .catch((error) => {
+                    alert('Error al cargar detalles del usuario: ' + error.message);
+                });
+        }
+
+        function viewSurvey(surveyId) {
+            db.collection('encuestas').doc(surveyId).get()
+                .then((doc) => {
+                    if (doc.exists) {
+                        const survey = doc.data();
+                        const modalBody = document.getElementById('modal-body');
+                        let respuestasHtml = '';
+                        
+                        if (survey.respuestas) {
+                            Object.keys(survey.respuestas).forEach(key => {
+                                respuestasHtml += `<tr><td><strong>${key}:</strong></td><td>${survey.respuestas[key]}</td></tr>`;
+                            });
+                        }
+                        
+                        modalBody.innerHTML = `
+                            <h4>Respuestas de Encuesta</h4>
+                            <table class="admin-table">
+                                <tr><td><strong>ID:</strong></td><td>${surveyId}</td></tr>
+                                <tr><td><strong>Usuario:</strong></td><td>${survey.usuarioNombre || 'Anónimo'}</td></tr>
+                                <tr><td><strong>Fecha:</strong></td><td>${survey.fecha ? survey.fecha.toDate().toLocaleString() : 'N/A'}</td></tr>
+                                <tr><td colspan="2"><strong>Respuestas:</strong></td></tr>
+                                ${respuestasHtml}
+                            </table>
+                        `;
+                        document.getElementById('modal-title').textContent = 'Respuestas de Encuesta';
+                        document.getElementById('detail-modal').style.display = 'flex';
+                    }
+                })
+                .catch((error) => {
+                    alert('Error al cargar detalles de la encuesta: ' + error.message);
+                });
+        }
+
+        function viewComparison(compId) {
+            db.collection('comparaciones').doc(compId).get()
+                .then((doc) => {
+                    if (doc.exists) {
+                        const comp = doc.data();
+                        const modalBody = document.getElementById('modal-body');
+                        modalBody.innerHTML = `
+                            <h4>Detalles de Comparación</h4>
+                            <table class="admin-table">
+                                <tr><td><strong>ID:</strong></td><td>${compId}</td></tr>
+                                <tr><td><strong>Usuario:</strong></td><td>${comp.usuarioNombre || 'Anónimo'}</td></tr>
+                                <tr><td><strong>Fecha:</strong></td><td>${comp.fecha ? comp.fecha.toDate().toLocaleString() : 'N/A'}</td></tr>
+                                <tr><td><strong>Categoría:</strong></td><td>${comp.categoria ? comp.categoria.toUpperCase() : 'N/A'}</td></tr>
+                                <tr><td><strong>Componente A:</strong></td><td>${comp.nombres ? comp.nombres.componenteA : 'N/A'}</td></tr>
+                                <tr><td><strong>Componente B:</strong></td><td>${comp.nombres ? comp.nombres.componenteB : 'N/A'}</td></tr>
+                            </table>
+                        `;
+                        document.getElementById('modal-title').textContent = 'Detalles de Comparación';
+                        document.getElementById('detail-modal').style.display = 'flex';
+                    }
+                })
+                .catch((error) => {
+                    alert('Error al cargar detalles de la comparación: ' + error.message);
+                });
+        }
+
+        function deleteUser(userId) {
+            if (confirm('¿Estás seguro de que quieres eliminar este usuario? Esta acción no se puede deshacer.')) {
+                db.collection('usuarios').doc(userId).delete()
+                    .then(() => {
+                        alert('Usuario eliminado correctamente');
+                        loadUsers();
+                    })
+                    .catch((error) => {
+                        alert('Error al eliminar usuario: ' + error.message);
+                    });
+            }
+        }
+
+        function deleteSurvey(surveyId) {
+            if (confirm('¿Estás seguro de que quieres eliminar esta encuesta? Esta acción no se puede deshacer.')) {
+                db.collection('encuestas').doc(surveyId).delete()
+                    .then(() => {
+                        alert('Encuesta eliminada correctamente');
+                        loadSurveys();
+                    })
+                    .catch((error) => {
+                        alert('Error al eliminar encuesta: ' + error.message);
+                    });
+            }
+        }
+
+        function deleteComparison(compId) {
+            if (confirm('¿Estás seguro de que quieres eliminar esta comparación? Esta acción no se puede deshacer.')) {
+                db.collection('comparaciones').doc(compId).delete()
+                    .then(() => {
+                        alert('Comparación eliminada correctamente');
+                        loadComparisons();
+                    })
+                    .catch((error) => {
+                        alert('Error al eliminar comparación: ' + error.message);
+                    });
+            }
+        }
+
+        // Hacer funciones globales para que puedan ser llamadas desde HTML
+        window.viewUser = viewUser;
+        window.viewSurvey = viewSurvey;
+        window.viewComparison = viewComparison;
+        window.deleteUser = deleteUser;
+        window.deleteSurvey = deleteSurvey;
+        window.deleteComparison = deleteComparison;
+    </script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | T-HardIA</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container navbar">
+            <a href="dashboard.html" class="logo">T-Hard<span>IA</span></a>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Inicio</a></li>
+                <li><a href="compare.html">Comparar</a></li>
+                <li><a href="survey.html">Encuesta</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+            </ul>
+            <div class="nav-actions">
+                <span class="user-info" id="user-name">Usuario</span>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="logout-btn" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Salir
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Blog de Hardware</h1>
+            <p>Las últimas noticias, análisis y tendencias del mundo del hardware</p>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Artículos Recientes</h2>
+            
+            <div class="blog-grid">
+                <!-- Artículo 1 -->
+                <div class="blog-card card">
+                    <div class="blog-image" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="blog-content">
+                        <h3>Guía Completa de CPUs AMD Ryzen 7000</h3>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 15 Oct 2023</span>
+                            <span><i class="far fa-user"></i> Carlos Ruiz</span>
+                        </div>
+                        <p class="blog-excerpt">Exploramos las nuevas CPUs AMD Ryzen 7000 serie, sus mejoras de rendimiento y eficiencia energética en comparación con generaciones anteriores.</p>
+                        <a href="#" class="btn btn-outline">Leer más</a>
+                    </div>
+                </div>
+                
+                <!-- Artículo 2 -->
+                <div class="blog-card card">
+                    <div class="blog-image" style="background-image: url('https://images.unsplash.com/photo-1543966897-51f3c416d41d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="blog-content">
+                        <h3>RTX 4090 vs RX 7900 XTX: Batalla de Alta Gama</h3>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 10 Oct 2023</span>
+                            <span><i class="far fa-user"></i> María López</span>
+                        </div>
+                        <p class="blog-excerpt">Análisis detallado de las dos tarjetas gráficas más potentes del mercado, comparando rendimiento, consumo y valor.</p>
+                        <a href="#" class="btn btn-outline">Leer más</a>
+                    </div>
+                </div>
+                
+                <!-- Artículo 3 -->
+                <div class="blog-card card">
+                    <div class="blog-image" style="background-image: url('https://images.unsplash.com/photo-1555404294-086990c6094e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="blog-content">
+                        <h3>DDR5 vs DDR4: ¿Vale la pena el cambio?</h3>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 5 Oct 2023</span>
+                            <span><i class="far fa-user"></i> Juan Pérez</span>
+                        </div>
+                        <p class="blog-excerpt">Examinamos las diferencias entre las nuevas memorias DDR5 y las tradicionales DDR4, evaluando rendimiento y compatibilidad.</p>
+                        <a href="#" class="btn btn-outline">Leer más</a>
+                    </div>
+                </div>
+                
+                <!-- Artículo 4 -->
+                <div class="blog-card card">
+                    <div class="blog-image" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="blog-content">
+                        <h3>SSD NVMe: Velocidad Extrema en Almacenamiento</h3>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 1 Oct 2023</span>
+                            <span><i class="far fa-user"></i> Ana Gómez</span>
+                        </div>
+                        <p class="blog-excerpt">Guía completa sobre unidades SSD NVMe, sus ventajas sobre los discos duros tradicionales y recomendaciones de compra.</p>
+                        <a href="#" class="btn btn-outline">Leer más</a>
+                    </div>
+                </div>
+                
+                <!-- Artículo 5 -->
+                <div class="blog-card card">
+                    <div class="blog-image" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="blog-content">
+                        <h3>Watercooling Personalizado: Guía para Principiantes</h3>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 25 Sep 2023</span>
+                            <span><i class="far fa-user"></i> Luis Martínez</span>
+                        </div>
+                        <p class="blog-excerpt">Aprende los conceptos básicos del watercooling personalizado, sus ventajas y cómo instalarlo correctamente en tu PC.</p>
+                        <a href="#" class="btn btn-outline">Leer más</a>
+                    </div>
+                </div>
+                
+                <!-- Artículo 6 -->
+                <div class="blog-card card">
+                    <div class="blog-image" style="background-image: url('https://images.unsplash.com/photo-1543966897-51f3c416d41d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="blog-content">
+                        <h3>Monitores 4K: ¿Qué buscar en tu próxima compra?</h3>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 20 Sep 2023</span>
+                            <span><i class="far fa-user"></i> Sofía Ramírez</span>
+                        </div>
+                        <p class="blog-excerpt">Factores clave a considerar al elegir un monitor 4K, desde frecuencia de actualización hasta compatibilidad con tu GPU.</p>
+                        <a href="#" class="btn btn-outline">Leer más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>T-HardIA</h3>
+                    <p>Tu asistente inteligente para tomar decisiones informadas sobre hardware.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="dashboard.html">Inicio</a></li>
+                        <li><a href="compare.html">Comparar</a></li>
+                        <li><a href="survey.html">Encuesta</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> contacto@hardware-ai.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Ciudad, País</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Hardware-AI. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Inicializar Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyClzzRrxUOTwd_dfOBE6dVv3V1G6xrTXuE",
+            authDomain: "t-hardia.firebaseapp.com",
+            projectId: "t-hardia",
+            storageBucket: "t-hardia.firebasestorage.app",
+            messagingSenderId: "462770565143",
+            appId: "1:462770565143:web:d6de124051899b9c742c52",
+            measurementId: "G-YQ9D6T371T"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        
+        // Verificar autenticación
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                document.getElementById('user-name').textContent = user.displayName || user.email.split('@')[0];
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+        
+        // Cerrar sesión
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            firebase.auth().signOut().then(function() {
+                window.location.href = 'index.html';
+            }).catch(function(error) {
+                console.error('Error al cerrar sesión:', error);
+            });
+        });
+        
+        // Toggle tema
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            const icon = this.querySelector('i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Cargar tema guardado
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                const icon = document.getElementById('theme-toggle').querySelector('i');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        });
+
+                // Aplicar tema guardado al cargar la página
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                const icon = document.getElementById('theme-toggle').querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+            }
+        });
+
+    </script>
+
+    <script>
+    // Aplicar tema guardado al cargar la página
+    window.addEventListener('DOMContentLoaded', function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                const icon = themeToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

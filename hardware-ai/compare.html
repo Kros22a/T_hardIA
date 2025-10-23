@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparador | Hardware-AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container navbar">
+            <a href="dashboard.html" class="logo">Hardware<span>-AI</span></a>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Inicio</a></li>
+                <li><a href="compare.html" class="active">Comparar</a></li>
+                <li><a href="survey.html">Encuesta</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <div class="nav-actions">
+                <span class="user-info" id="user-name">Usuario</span>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="logout-btn" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Salir
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Comparador de Hardware Inteligente</h1>
+            <p>Busca y compara cualquier componente con datos actualizados automáticamente</p>
+        </div>
+    </section>
+
+    <!-- Compare Section -->
+    <section class="section">
+        <div class="container compare-container">
+            <h2 class="section-title">Busca y Compara Componentes</h2>
+            
+            <form class="compare-form" id="compare-form">
+                <div class="form-group">
+                    <label for="category">Categoría de Hardware</label>
+                    <select id="category" required>
+                        <option value="">Cargando categorías...</option>
+                    </select>
+                </div>
+                
+                <div class="compare-grid">
+                    <div class="compare-item">
+                        <h3>Componente A</h3>
+                        <div class="form-group">
+                            <label for="searchA">Buscar Componente</label>
+                            <div style="position: relative;">
+                                <input type="text" id="searchA" placeholder="Ej: Ryzen 5 5600X" class="form-control" autocomplete="off">
+                                <div id="suggestionsA" class="suggestions-dropdown"></div>
+                                <div class="loading-indicator" id="loadingA" style="display: none;">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </div>
+                            </div>
+                            <input type="hidden" id="selectedA" required>
+                        </div>
+                        <div id="selected-itemA" class="selected-item-display"></div>
+                    </div>
+                    
+                    <div class="compare-item">
+                        <h3>Componente B</h3>
+                        <div class="form-group">
+                            <label for="searchB">Buscar Componente</label>
+                            <div style="position: relative;">
+                                <input type="text" id="searchB" placeholder="Ej: Intel i5-12600K" class="form-control" autocomplete="off">
+                                <div id="suggestionsB" class="suggestions-dropdown"></div>
+                                <div class="loading-indicator" id="loadingB" style="display: none;">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </div>
+                            </div>
+                            <input type="hidden" id="selectedB" required>
+                        </div>
+                        <div id="selected-itemB" class="selected-item-display"></div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">Comparar Componentes</button>
+            </form>
+            
+            <div id="comparison-result" style="display: none;">
+                <h2 class="section-title">Resultado de Comparación</h2>
+                
+                <div class="spec-table-container">
+                    <table class="spec-table">
+                        <thead>
+                            <tr>
+                                <th>Característica</th>
+                                <th id="itemA-name">Componente A</th>
+                                <th id="itemB-name">Componente B</th>
+                            </tr>
+                        </thead>
+                        <tbody id="spec-table-body">
+                            <!-- Las especificaciones se llenarán aquí -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="ai-response">
+                    <h3><i class="fas fa-robot"></i> Recomendación AI</h3>
+                    <!-- Aquí mostramos primer la recomendación local/simulada (fallback) -->
+                    <div id="ai-recommendation">
+                        <!-- La recomendación AI se llenará aquí -->
+                    </div>
+
+                    <!-- Y aquí el resultado real que venga del backend (OpenAI) -->
+                    <div id="ai-compare-remote" style="margin-top: 1rem; display: none;">
+                        <div id="ai-compare-loading" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i> Generando análisis con IA...
+                        </div>
+                        <div id="ai-compare-result" style="margin-top: 0.75rem;"></div>
+                        <div id="ai-compare-error" style="color: #d9534f; display:none; margin-top:0.75rem;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hardware Database Section -->
+    <section class="section" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Base de Datos de Hardware</h2>
+            <p class="text-center mb-4">Explora componentes actualizados automáticamente</p>
+            
+            <div class="form-group mb-4" style="max-width: 500px; margin: 0 auto;">
+                <div style="position: relative;">
+                    <input type="text" id="search-database" placeholder="Buscar en toda la base de datos..." class="form-control">
+                    <i class="fas fa-search" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #6c757d;"></i>
+                </div>
+            </div>
+            
+            <div class="mb-3" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <button class="btn btn-outline filter-btn active" data-category="all">Todos</button>
+                <!-- Las categorías se cargarán dinámicamente -->
+            </div>
+            
+            <div id="database-results" class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div class="text-center" style="grid-column: 1/-1;">
+                    <i class="fas fa-spinner fa-spin fa-2x"></i>
+                    <p>Cargando componentes...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Hardware-AI</h3>
+                    <p>Tu asistente inteligente para tomar decisiones informadas sobre hardware.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="dashboard.html">Inicio</a></li>
+                        <li><a href="compare.html">Comparar</a></li>
+                        <li><a href="survey.html">Encuesta</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> contacto@hardware-ai.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Ciudad, País</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Hardware-AI. Datos actualizados automáticamente.</p>
+            </div>
+        </div>
+    </footer>
+
+        <!-- Firebase (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
+    <!-- Tu script externo -->
+    <script src="js/compare.js"></script>
+
+</body>
+</html>
+    

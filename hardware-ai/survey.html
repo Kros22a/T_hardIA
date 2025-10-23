@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta | Hardware-AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container navbar">
+            <a href="dashboard.html" class="logo">Hardware<span>-AI</span></a>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Inicio</a></li>
+                <li><a href="compare.html">Comparar</a></li>
+                <li><a href="survey.html" class="active">Encuesta</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <div class="nav-actions">
+                <span class="user-info" id="user-name">Usuario</span>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="logout-btn" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Salir
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Encuesta de Preferencias</h1>
+            <p>Ayúdanos a mejorar nuestros servicios respondiendo estas preguntas</p>
+        </div>
+    </section>
+
+    <!-- Survey Section -->
+    <section class="section">
+        <div class="container survey-container">
+            <div id="survey-content">
+                <h2 class="section-title">Preguntas de la Encuesta</h2>
+                <p class="text-center mb-4">Por favor responde las siguientes preguntas para ayudarnos a personalizar mejor nuestros servicios</p>
+                
+                <form class="survey-form" id="survey-form">
+                    <div id="survey-questions">
+                        <!-- Las preguntas se generarán dinámicamente -->
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">Enviar Respuestas</button>
+                </form>
+            </div>
+            
+            <div id="thank-you" class="thank-you" style="display: none;">
+                <i class="fas fa-check-circle"></i>
+                <h2 class="text-success">¡Gracias por tu tiempo!</h2>
+                <p class="mt-2">Tus respuestas nos ayudan a mejorar nuestros servicios.</p>
+                <a href="dashboard.html" class="btn btn-primary mt-3">Volver al Dashboard</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Hardware-AI</h3>
+                    <p>Tu asistente inteligente para tomar decisiones informadas sobre hardware.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="dashboard.html">Inicio</a></li>
+                        <li><a href="compare.html">Comparar</a></li>
+                        <li><a href="survey.html">Encuesta</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> contacto@hardware-ai.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Ciudad, País</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Hardware-AI. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <script>
+        // Inicializar Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyClzzRrxUOTwd_dfOBE6dVv3V1G6xrTXuE",
+            authDomain: "t-hardia.firebaseapp.com",
+            projectId: "t-hardia",
+            storageBucket: "t-hardia.firebasestorage.app",
+            messagingSenderId: "462770565143",
+            appId: "1:462770565143:web:d6de124051899b9c742c52",
+            measurementId: "G-YQ9D6T371T"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Verificar autenticación
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                document.getElementById('user-name').textContent = user.displayName || user.email.split('@')[0];
+                generateSurvey();
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Cerrar sesión
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            firebase.auth().signOut().then(function() {
+                window.location.href = 'index.html';
+            }).catch(function(error) {
+                console.error('Error al cerrar sesión:', error);
+                alert('Error al cerrar sesión: ' + error.message);
+            });
+        });
+
+        // Toggle tema
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            const icon = this.querySelector('i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Cargar tema guardado
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                const icon = document.getElementById('theme-toggle').querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+            }
+        });
+
+        // Preguntas de la encuesta
+        const surveyQuestions = [
+            {
+                id: 1,
+                question: "¿Qué tipo de hardware te interesa más?",
+                options: ["CPU", "GPU", "RAM", "SSD", "Placas base"]
+            },
+            {
+                id: 2,
+                question: "¿Cuál es tu presupuesto máximo para una compra de hardware?",
+                options: ["Menos de $200", "$200 - $500", "$500 - $1000", "Más de $1000"]
+            },
+            {
+                id: 3,
+                question: "¿Con qué frecuencia actualizas tu hardware?",
+                options: ["Cada año", "Cada 2-3 años", "Cada 4-5 años", "Solo cuando es necesario"]
+            },
+            {
+                id: 4,
+                question: "¿Qué marca prefieres para CPUs?",
+                options: ["Intel", "AMD", "Ambas por igual", "Otra"]
+            },
+            {
+                id: 5,
+                question: "¿Qué importancia tiene el consumo energético al elegir hardware?",
+                options: ["Muy importante", "Importante", "Poco importante", "Nada importante"]
+            },
+            {
+                id: 6,
+                question: "¿Qué sistema operativo usas principalmente?",
+                options: ["Windows", "Linux", "macOS", "Otros"]
+            },
+            {
+                id: 7,
+                question: "¿Qué tipo de uso le das a tu computadora?",
+                options: ["Oficina/Básico", "Gaming", "Diseño/Edición", "Programación/Desarrollo"]
+            },
+            {
+                id: 8,
+                question: "¿Qué tan importante es la compatibilidad con software específico?",
+                options: ["Muy importante", "Importante", "Poco importante", "Nada importante"]
+            },
+            {
+                id: 9,
+                question: "¿Prefieres hardware nuevo o de segunda mano?",
+                options: ["Siempre nuevo", "Nuevo la mayoría del tiempo", "Mezcla de ambos", "Prefiero segunda mano"]
+            },
+            {
+                id: 10,
+                question: "¿Qué tan importante es la garantía al comprar hardware?",
+                options: ["Muy importante", "Importante", "Poco importante", "Nada importante"]
+            },
+            {
+                id: 11,
+                question: "¿Qué tipo de almacenamiento prefieres?",
+                options: ["Solo SSD", "Solo HDD", "Combinación SSD+HDD", "Depende del uso"]
+            },
+            {
+                id: 12,
+                question: "¿Qué tan importante es el overclocking para ti?",
+                options: ["Muy importante", "Importante", "Poco importante", "Nada importante"]
+            },
+            {
+                id: 13,
+                question: "¿Qué marca prefieres para GPUs?",
+                options: ["NVIDIA", "AMD", "Ambas por igual", "Otra"]
+            },
+            {
+                id: 14,
+                question: "¿Qué tan importante es el factor de forma (tamaño) del hardware?",
+                options: ["Muy importante", "Importante", "Poco importante", "Nada importante"]
+            },
+            {
+                id: 15,
+                question: "¿Qué tan importante es la refrigeración al elegir componentes?",
+                options: ["Muy importante", "Importante", "Poco importante", "Nada importante"]
+            }
+        ];
+
+        // Función para obtener 5 preguntas aleatorias
+        function getRandomQuestions() {
+            const shuffled = [...surveyQuestions].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, 5);
+        }
+
+        // Generar encuesta
+        function generateSurvey() {
+            const questionsContainer = document.getElementById('survey-questions');
+            const randomQuestions = getRandomQuestions();
+
+            questionsContainer.innerHTML = '';
+
+            randomQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'survey-question';
+                questionDiv.innerHTML = `
+                    <div class="question-text">${index + 1}. ${q.question}</div>
+                    <div class="survey-options">
+                        ${q.options.map((option, optIndex) => `
+                            <label class="survey-option">
+                                <input type="radio" name="q${q.id}" value="${option}" required>
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                `;
+                questionsContainer.appendChild(questionDiv);
+            });
+        }
+
+        // Enviar encuesta y guardar en Firestore
+        document.getElementById('survey-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const user = firebase.auth().currentUser;
+            if (!user) {
+                alert('Debes iniciar sesión para enviar la encuesta');
+                return;
+            }
+
+            // Obtener respuestas
+            const formData = new FormData(this);
+            const responses = {};
+
+            for (let [key, value] of formData.entries()) {
+                responses[key] = value;
+            }
+
+            // Guardar en Firestore
+            db.collection('encuestas').add({
+                userId: user.uid,
+                usuarioNombre: user.displayName || user.email.split('@')[0],
+                fecha: firebase.firestore.FieldValue.serverTimestamp(),
+                respuestas: responses
+            })
+            .then(() => {
+                console.log('Encuesta guardada correctamente');
+                // Mostrar agradecimiento
+                document.getElementById('survey-content').style.display = 'none';
+                document.getElementById('thank-you').style.display = 'block';
+            })
+            .catch((error) => {
+                console.error('Error guardando encuesta:', error);
+                alert('Error al guardar la encuesta: ' + error.message);
+            });
+        });
+    </script>
+</body>
+</html>

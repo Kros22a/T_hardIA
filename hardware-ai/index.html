@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardware-AI | Comparador de Hardware</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Hardware-AI: Tu Asistente de Hardware Inteligente</h1>
+            <p>Compara, analiza y elige el mejor hardware con la ayuda de inteligencia artificial</p>
+            <a href="#auth" class="btn btn-secondary">Comenzar Ahora</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Nuestras Características</h2>
+            <div class="feature-grid">
+                <div class="feature-card card">
+                    <i class="fas fa-microchip"></i>
+                    <h3>Comparador Inteligente</h3>
+                    <p>Compara CPUs, GPUs, RAM y más con análisis detallado</p>
+                </div>
+                <div class="feature-card card">
+                    <i class="fas fa-robot"></i>
+                    <h3>Asistente AI</h3>
+                    <p>Recomendaciones personalizadas basadas en tus necesidades</p>
+                </div>
+                <div class="feature-card card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Análisis de Rendimiento</h3>
+                    <p>Datos actualizados de benchmarks y precios</p>
+                </div>
+                <div class="feature-card card">
+                    <i class="fas fa-poll"></i>
+                    <h3>Encuestas Personalizadas</h3>
+                    <p>5 preguntas aleatorias para entender tus preferencias</p>
+                </div>
+                <div class="feature-card card">
+                    <i class="fas fa-newspaper"></i>
+                    <h3>Blog de Hardware</h3>
+                    <p>Últimas noticias y análisis del mundo del hardware</p>
+                </div>
+                <div class="feature-card card">
+                    <i class="fas fa-user-shield"></i>
+                    <h3>Panel de Administrador</h3>
+                    <p>Gestión completa de usuarios y contenido</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Auth Section -->
+    <section class="section" id="auth">
+        <div class="container">
+            <h2 class="section-title">Accede a tu Cuenta</h2>
+            <div class="auth-container">
+                <div class="auth-header">
+                    <h2>Bienvenido a Hardware-AI</h2>
+                    <p>Ingresa tus credenciales para continuar</p>
+                </div>
+                
+                <div class="auth-tabs">
+                    <div class="auth-tab active" data-tab="login">Iniciar Sesión</div>
+                    <div class="auth-tab" data-tab="register">Registrarse</div>
+                </div>
+                
+                <div class="alert alert-success" id="success-message"></div>
+                <div class="alert alert-error" id="error-message"></div>
+                
+                <!-- Login Form -->
+                <form class="auth-form active" id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Correo Electrónico</label>
+                        <input type="email" id="login-email" required placeholder="tu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Contraseña</label>
+                        <div class="password-container">
+                            <input type="password" id="login-password" required placeholder="••••••••">
+                            <button type="button" class="toggle-password" id="toggle-login-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+                </form>
+                
+                <!-- Register Form -->
+                <form class="auth-form" id="register-form">
+                    <div class="form-group">
+                        <label for="register-name">Nombre Completo</label>
+                        <input type="text" id="register-name" required placeholder="Tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Correo Electrónico</label>
+                        <input type="email" id="register-email" required placeholder="tu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Contraseña</label>
+                        <div class="password-container">
+                            <input type="password" id="register-password" required placeholder="••••••••" minlength="6">
+                            <button type="button" class="toggle-password" id="toggle-register-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Crear Cuenta</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section" style="background-color: #f0f4ff;">
+        <div class="container">
+            <h2 class="section-title">Lo que dicen nuestros usuarios</h2>
+            <div class="feature-grid">
+                <div class="feature-card card">
+                    <div style="font-size: 2rem; color: #ffc107; margin-bottom: 1rem;">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"Hardware-AI me ayudó a elegir la GPU perfecta para mi setup de edición. ¡Las comparaciones son increíbles!"</p>
+                    <div style="margin-top: 1rem; font-weight: 600;">- Carlos Mendoza</div>
+                </div>
+                <div class="feature-card card">
+                    <div style="font-size: 2rem; color: #ffc107; margin-bottom: 1rem;">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"La encuesta personalizada realmente entiende mis necesidades. Ahora tengo una PC perfecta para gaming."</p>
+                    <div style="margin-top: 1rem; font-weight: 600;">- María López</div>
+                </div>
+                <div class="feature-card card">
+                    <div style="font-size: 2rem; color: #ffc107; margin-bottom: 1rem;">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>"Como administrador, el panel de control me permite gestionar todo el sistema de forma eficiente."</p>
+                    <div style="margin-top: 1rem; font-weight: 600;">- Admin Hardware-AI</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Hardware-AI</h3>
+                    <p>Tu asistente inteligente para tomar decisiones informadas sobre hardware.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#auth">Iniciar Sesión</a></li>
+                        <li><a href="#auth">Registrarse</a></li>
+                        <li><a href="#features">Características</a></li>
+                        <li><a href="#">Comparador</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Categorías</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Procesadores (CPU)</a></li>
+                        <li><a href="#">Tarjetas Gráficas (GPU)</a></li>
+                        <li><a href="#">Memoria RAM</a></li>
+                        <li><a href="#">Almacenamiento (SSD/HDD)</a></li>
+                        <li><a href="#">Placas Base</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> contacto@hardware-ai.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Ciudad Tecnológica, País</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Hardware-AI. Todos los derechos reservados.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+                    <a href="#" style="color: #aaa; text-decoration: none;">Términos de Uso</a> | 
+                    <a href="#" style="color: #aaa; text-decoration: none;">Política de Privacidad</a> | 
+                    <a href="#" style="color: #aaa; text-decoration: none;">Cookies</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script>
+        // Inicializar Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyClzzRrxUOTwd_dfOBE6dVv3V1G6xrTXuE",
+            authDomain: "t-hardia.firebaseapp.com",
+            projectId: "t-hardia",
+            storageBucket: "t-hardia.firebasestorage.app",
+            messagingSenderId: "462770565143",
+            appId: "1:462770565143:web:d6de124051899b9c742c52",
+            measurementId: "G-YQ9D6T371T"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        
+        // Mostrar/Ocultar contraseña
+        document.getElementById('toggle-login-password').addEventListener('click', function() {
+            const passwordInput = document.getElementById('login-password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+        
+        document.getElementById('toggle-register-password').addEventListener('click', function() {
+            const passwordInput = document.getElementById('register-password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+        
+        // Cambiar entre pestañas
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remover clase activa de todas las pestañas
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                // Agregar clase activa a la pestaña clickeada
+                this.classList.add('active');
+                
+                // Ocultar todos los formularios
+                document.querySelectorAll('.auth-form').forEach(form => form.classList.remove('active'));
+                
+                // Mostrar el formulario correspondiente
+                const tabName = this.getAttribute('data-tab');
+                document.getElementById(`${tabName}-form`).classList.add('active');
+                
+                // Limpiar mensajes
+                document.getElementById('success-message').style.display = 'none';
+                document.getElementById('error-message').style.display = 'none';
+            });
+        });
+        
+        // Función para mostrar mensajes
+        function showMessage(type, message) {
+            const successMsg = document.getElementById('success-message');
+            const errorMsg = document.getElementById('error-message');
+            
+            if (type === 'success') {
+                successMsg.textContent = message;
+                successMsg.style.display = 'block';
+                errorMsg.style.display = 'none';
+            } else {
+                errorMsg.textContent = message;
+                errorMsg.style.display = 'block';
+                successMsg.style.display = 'none';
+            }
+        }
+        
+        // Verificar si es administrador para redirigir al panel admin
+        function checkAdminRedirect(user) {
+            if (user.email === 'admin@hardware-ai.com') {
+                window.location.href = 'admin.html';
+            } else {
+                window.location.href = 'dashboard.html';
+            }
+        }
+        
+        // Manejar login
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Login exitoso
+                    showMessage('success', '¡Inicio de sesión exitoso! Redirigiendo...');
+                    setTimeout(() => {
+                        checkAdminRedirect(userCredential.user);
+                    }, 1500);
+                })
+                .catch((error) => {
+                    // Error en login
+                    let errorMessage = 'Error al iniciar sesión. ';
+                    switch(error.code) {
+                        case 'auth/user-not-found':
+                            errorMessage += 'Usuario no encontrado.';
+                            break;
+                        case 'auth/wrong-password':
+                            errorMessage += 'Contraseña incorrecta.';
+                            break;
+                        case 'auth/invalid-email':
+                            errorMessage += 'Correo electrónico inválido.';
+                            break;
+                        default:
+                            errorMessage += error.message;
+                    }
+                    showMessage('error', errorMessage);
+                });
+        });
+        
+        // Manejar registro
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Registro exitoso
+                    const user = userCredential.user;
+                    
+                    // Actualizar nombre de usuario
+                    return user.updateProfile({
+                        displayName: name
+                    });
+                })
+                .then((user) => {
+                    showMessage('success', '¡Registro exitoso! Bienvenido a Hardware-AI.');
+                    setTimeout(() => {
+                        checkAdminRedirect(firebase.auth().currentUser);
+                    }, 1500);
+                })
+                .catch((error) => {
+                    // Error en registro
+                    let errorMessage = 'Error al registrarse. ';
+                    switch(error.code) {
+                        case 'auth/email-already-in-use':
+                            errorMessage += 'El correo electrónico ya está en uso.';
+                            break;
+                        case 'auth/invalid-email':
+                            errorMessage += 'Correo electrónico inválido.';
+                            break;
+                        case 'auth/weak-password':
+                            errorMessage += 'La contraseña es muy débil. Mínimo 6 caracteres.';
+                            break;
+                        default:
+                            errorMessage += error.message;
+                    }
+                    showMessage('error', errorMessage);
+                });
+        });
+        
+        // Aplicar tema guardado al cargar la página
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                const themeToggle = document.getElementById('theme-toggle');
+                if (themeToggle) {
+                    const icon = themeToggle.querySelector('i');
+                    if (icon) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
